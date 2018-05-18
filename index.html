@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="main.js"></script>
+		<title>
+			Sports Board Form
+		</title>
+
+		<link href="main.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	</head>
+	<body>
+		<section id="main-section">
+			<div class="container" id="content">
+				<div class="container">
+				<h1>Sports Board Booking Form </h1>
+				</div>
+				<div class="container" id="form-outer">
+				<form class="" id="main_form" onsubmit="return validate_form()">
+					<div class="form-group">
+						<label for="booker">Booking Done By</label>
+						<input class="form-control" type="text" id="booker" placeholder="Booking done by" required>
+					</div>
+					<div class="form-group">
+						<label for="booking-date">Date</label>
+						<input class="form-control" type="date" id="booking-date" placeholder="Date to be booked for" required>
+					</div>
+					<div class="form-group">
+						<label for="ground">Ground</label>
+						<select class="form-control" id="ground" required>
+							<option>Football</option>
+							<option>Cricket 1</option>
+							<option>Cricket 2</option>
+							<option>Badminton</option>
+							<option>Hockey</option>
+						</select>
+					</div>					
+					<div class="form-group">
+						<label for="booking-from">From</label>
+						<input class="form-control" type="time" id="booking-from" placeholder="Time for booking" required>	
+					</div>
+					<div class="form-group">
+						<label for="booking-to">To</label>
+						<input class="form-control" type="time" id="booking-to" placeholder="Time for booking" required>	
+					</div>
+					<div class="form-group">
+						<label for="activity">Activity</label>
+						<input class="form-control" type="text" id="activity" placeholder="Reason for booking" required>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+		</section>
+
+		<script>
+			function convert_to_ms(time) {
+				var hours = parseInt(time.substring(0, 2));
+				var minutes = parseInt(time.substring(3, 5));
+
+				var ms = (hours * 60 + minutes) * 60 * 1000;
+				return ms;
+			}
+
+			function validate_form() {
+				var form = document.forms['main_form'];
+				var name = form['booker'].value;
+				var date = Date.parse(form['booking-date'].value);
+				var from = convert_to_ms(form['booking-from'].value);
+				var to = convert_to_ms(form['booking-to'].value);
+				var ground = form['ground'].value;
+				var activity = form['activity'].value;
+
+				if(/[^a-z| ]/i.test(name)){
+					alert("No special characters or numbers allowed in name");
+					return false;
+				}
+
+				var curr_date = new Date();
+				var curr_time = curr_date.getTime();
+
+				if(from >= to) {
+					alert("Start time is before end time");
+					return false
+				}
+
+				if(curr_time > date + from){
+					alert("Time mentioned is in the past");
+					return false;
+				}
+
+				alert("Success!");
+				return true;
+
+			}
+		</script>
+	</body>
+</html>

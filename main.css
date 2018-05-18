@@ -1,0 +1,15 @@
+h1 {
+	font-size: 5em;
+}
+
+#content {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.container {
+	padding: 20px;
+	padding-bottom: 30px;
+}
