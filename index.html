@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script type="text/javascript" src="main.js"></script>
 		<title>
 			Sports Board Form
 		</title>
 
 		<link href="main.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<section id="main-section">
@@ -16,7 +17,7 @@
 				<h1>Sports Board Booking Form </h1>
 				</div>
 				<div class="container" id="form-outer">
-				<form class="" id="main_form" onsubmit="return validate_form()">
+				<form class="" id="main_form" onsubmit="return validate_form()" action="#">
 					<div class="form-group">
 						<label for="booker">Booking Done By</label>
 						<input class="form-control" type="text" id="booker" placeholder="Booking done by" required>
@@ -48,8 +49,30 @@
 						<input class="form-control" type="text" id="activity" placeholder="Reason for booking" required>
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-		</div>
+				</form>
+				</div>
+				<div class="container" id="tabl">
+					<h2> Successful Booking!</h2>
+					<table cellpadding="10px" id="entry-table">
+						<tr>
+							<th>Name of Booker</th>
+							<th>Ground Booked</th>
+							<th>Date booked for</th>
+							<th>Booking from</th>
+							<th>Booking to</th>
+							<th>Purpose of booking</th>
+						</tr>
+						<tr>
+							<td id='table-booker'></td>
+							<td id='table-ground'></td>
+							<td id='table-date'></td>
+							<td id='table-from'></td>
+							<td id='table-to'></td>
+							<td id='table-activity'></td>
+						</tr>
+						</div>
+					</table>
+				</div>
 		</section>
 
 		<script>
@@ -89,6 +112,16 @@
 				}
 
 				alert("Success!");
+
+				document.getElementById('table-booker').innerHTML = name;
+				document.getElementById('table-ground').innerHTML = ground;
+				document.getElementById('table-date').innerHTML = form['booking-date'].value;
+				document.getElementById('table-from').innerHTML = form['booking-from'].value;
+				document.getElementById('table-to').innerHTML = form['booking-to'].value;
+				document.getElementById('table-activity').innerHTML = activity;
+
+				document.getElementById("tabl").style.display = "block";
+
 				return true;
 
 			}
